@@ -1,0 +1,16 @@
+<div ng-controller="mainController">
+  <div ng-model='hello'> {{hello}} </div>
+  <div ng-repeat="date in API">
+    <!-- <p>{{date.dt_txt}}</p>
+    <p>{{date.weather[0].main}}</p>
+    <p>{{date.weather[0].description}}</p>
+    <h5>Temperature: {{date.main.temp}}</h5>
+    <img src ='http://openweathermap.org/img/w/{{date.weather[0].icon}}.png' /> -->
+
+
+
+    <div ng-repeat='hour in monday'>
+      <p>{{hour.dt_txt}}</p>
+      <p>{{hour.main}}</p>
+    </div>
+  </div>
