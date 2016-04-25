@@ -30,6 +30,15 @@ describe('On the Forecast page', function() {
     expect(element(by.css('.hourlyCast')).isDisplayed()).toBeTruthy()
 
   })
+  it('Shows temperatures for all 3 days', function(){
+    browser.get('http://localhost:8080/');
+    element(by.model('threeDayButton')).click()
+    expect(element(by.css('.iconShow')).isPresent()).toBeTruthy()
+    expect(element(by.css('.descriptionShow')).isDisplayed()).toBeTruthy()
+    expect(element(by.css('.temperatureShow')).isDisplayed()).toBeTruthy()
+
+
+  })
   // it('Displays 3-day forecast and no other when 3 day Is clicked', function(){
   //   browser.get('http://localhost:8080/');
   //   element(by.css('#threeDayButton')).click()

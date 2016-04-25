@@ -5,7 +5,7 @@
     <div class="showButtons">
       <ul>
         <li><button class='btn btn-primary' ng-click="showForecast('oneDay', 'threeDay', 'fiveDay')">One Day</button></li>
-        <li><button class='btn btn-primary' ng-click="showForecast('threeDay', 'oneDay', 'fiveDay')">Three Day</button</li>
+        <li><button ng-model="threeDayButton" class='btn btn-primary' ng-click="showForecast('threeDay', 'oneDay', 'fiveDay')">Three Day</button</li>
         <li><button class='btn btn-primary' ng-click="showForecast('fiveDay', 'threeDay', 'oneDay')">Five Day</button></li>
       </ul>
     </div>
@@ -26,12 +26,12 @@
 
     </div>
 
-    <div class="threeDayDiv" ng-show="threeDay">
+    <div class="threeDayDiv col-md-10" ng-show="threeDay">
       <div ng-repeat="(key,value) in threeDayForecast">
       <h1>{{key}}</h1>
-      <img id="oneDayIcon" src="http://openweathermap.org/img/w/{{value['03pm']['weather'][0].icon}}.png" alt="">
-      <p>{{value['03pm']['weather'][0]['description']}}</p>
-      <p class="dayTemperature">Temperature: {{value['03pm']['main']['temp']}} &#8457</p>
+      <img class="iconShow" src="http://openweathermap.org/img/w/{{value['03pm']['weather'][0].icon}}.png" alt="">
+      <p class="descriptionShow">{{value['03pm']['weather'][0]['description']}}</p>
+      <p class="temperatureShow">Temperature: {{value['03pm']['main']['temp']}} &#8457</p>
 
         <div class="threeDayExpand" ng-repeat="(hour,values) in threeDayForecast[key]" ng-show="threeDayExpand">
           <p class="hourlyCast" id={{hour}}> <span class="bold">{{hour}} </span>: {{values.main.temp}} &#8457 </p>
@@ -40,10 +40,10 @@
         </div>
 
       </div>
-      <button class="btn btn-primary" ng-click="showFull('threeDayExpand')"> Get Hourly </button>
+      <button  class="btn btn-primary" ng-click="showFull('threeDayExpand')"> Get Hourly </button>
     </div>
 
-    <div class="fiveDayDiv" ng-show="fiveDay">
+    <div class="fiveDayDiv col-md-10" ng-show="fiveDay">
       <div ng-repeat="(key,value) in fiveDayForecast">
       <h1>{{key}}</h1>
       <img id="oneDayIcon" src="http://openweathermap.org/img/w/{{value['03pm']['weather'][0].icon}}.png" alt="">
@@ -55,7 +55,9 @@
           <img src="http://openweathermap.org/img/w/{{values.weather[0].icon}}.png" alt="">
         </div>
       </div>
+      <div class="buttonDiv">
         <button class="btn btn-primary" ng-click="showFull('fiveDayExpand')"> Get Hourly </button>
+      </div>
     </div>
     <!-- <div ng-repeat="x in array1">
       <p>{{x}}</p>
