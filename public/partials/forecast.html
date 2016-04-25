@@ -1,16 +1,70 @@
-<div ng-controller="mainController">
-  <div ng-model='hello'> {{hello}} </div>
-  <div ng-repeat="date in API">
-    <!-- <p>{{date.dt_txt}}</p>
-    <p>{{date.weather[0].main}}</p>
-    <p>{{date.weather[0].description}}</p>
-    <h5>Temperature: {{date.main.temp}}</h5>
-    <img src ='http://openweathermap.org/img/w/{{date.weather[0].icon}}.png' /> -->
+<div ng-controller="mainController" class="container-fluid">
+  <div ng-model='title'> <i class="fa fa-bolt" aria-hidden="true"></i> The Cast </div>
 
-
-
-    <div ng-repeat='hour in monday'>
-      <p>{{hour.dt_txt}}</p>
-      <p>{{hour.main}}</p>
+  <div class="weatherDisplay col-md-12">
+    <div class="showButtons">
+      <ul>
+        <li><button class='btn btn-primary' ng-click="showForecast('oneDay', 'threeDay', 'fiveDay')">One Day</button></li>
+        <li><button class='btn btn-primary' ng-click="showForecast('threeDay', 'oneDay', 'fiveDay')">Three Day</button</li>
+        <li><button class='btn btn-primary' ng-click="showForecast('fiveDay', 'threeDay', 'oneDay')">Five Day</button></li>
+      </ul>
     </div>
+    <div class="oneDayDiv" ng-show="oneDay">
+      <h1>{{day}}</h1>
+      <img id="oneDayIcon" src="http://openweathermap.org/img/w/{{currentTemp['weather'][0].icon}}.png" alt="">
+      <p id="oneDayDescription">{{currentTemp['weather'][0].description}}</p>
+      <p id="oneDayLow"> Minimum Temperature: {{minAndMax.minimum}} &#8457</p>
+      <p id="oneDayHigh"> Maximum Temperature: {{minAndMax.maximum}} &#8457</p>
+      <p id="currentTemperature"> Current Temperature: {{currentTemp.main.temp}} &#8457</p>
+      <p id="oneDayHumidity"> Humidity: {{currentTemp.main.humidity}} % </p>
+      <p id="oneDayWind"> Wind: {{currentTemp.wind.speed}} mph </p>
+      <button class="btn btn-primary" ng-model="showFull" ng-click="showFull('oneDayExpand')"> Get Hourly </button>
+        <div id="oneDayExpand" ng-repeat="(key,value) in currentHourly.hourly" ng-show="oneDayExpand">
+          <p class="hourlyCast" id={{key}}> {{key}}: {{value.main.temp}} &#8457 </p>
+          <img src="http://openweathermap.org/img/w/{{value.weather[0].icon}}.png" alt="">
+        </div>
+
+    </div>
+
+    <div class="threeDayDiv" ng-show="threeDay">
+      <div ng-repeat="(key,value) in threeDayForecast">
+      <h1>{{key}}</h1>
+      <img id="oneDayIcon" src="http://openweathermap.org/img/w/{{value['03pm']['weather'][0].icon}}.png" alt="">
+      <p>{{value['03pm']['weather'][0]['description']}}</p>
+      <p class="dayTemperature">Temperature: {{value['03pm']['main']['temp']}} &#8457</p>
+
+        <div class="threeDayExpand" ng-repeat="(hour,values) in threeDayForecast[key]" ng-show="threeDayExpand">
+          <p class="hourlyCast" id={{hour}}> <span class="bold">{{hour}} </span>: {{values.main.temp}} &#8457 </p>
+          <img src="http://openweathermap.org/img/w/{{values.weather[0].icon}}.png" alt="">
+          <p class="hourlyDescription">{{values['weather'][0]['description']}} </p>
+        </div>
+
+      </div>
+      <button class="btn btn-primary" ng-click="showFull('threeDayExpand')"> Get Hourly </button>
+    </div>
+
+    <div class="fiveDayDiv" ng-show="fiveDay">
+      <div ng-repeat="(key,value) in fiveDayForecast">
+      <h1>{{key}}</h1>
+      <img id="oneDayIcon" src="http://openweathermap.org/img/w/{{value['03pm']['weather'][0].icon}}.png" alt="">
+      <p>{{value['03pm']['weather'][0]['description']}}</p>
+      <p class="dayTemperature">Temperature: {{value['03pm']['main']['temp']}} &#8457</p>
+
+        <div class="fiveDayExpand" ng-repeat="(hour,values) in fiveDayForecast[key]" ng-show="fiveDayExpand">
+          <p class="hourlyCast" id={{hour}}> <span class="bold">{{hour}} </span>: {{values.main.temp}} &#8457 </p>
+          <img src="http://openweathermap.org/img/w/{{values.weather[0].icon}}.png" alt="">
+        </div>
+      </div>
+        <button class="btn btn-primary" ng-click="showFull('fiveDayExpand')"> Get Hourly </button>
+    </div>
+    <!-- <div ng-repeat="x in array1">
+      <p>{{x}}</p>
+      <div ng-repeat="y in array2">
+        <p>{{y}}</p>
+      </div>
+    </div> -->
+
+
   </div>
+
+</div>

@@ -36,35 +36,35 @@ app.service('dateCalculations', ['$http', function ($http) {
   this.calculateHour = function(hour) {
     switch (hour) {
       case 0:
-      return '12:00am'
+      return '12am'
       break;
 
       case 3:
-      return '03:00am'
+      return '03am'
       break;
 
       case 6:
-      return '06:00am'
+      return '06am'
       break;
 
       case 9:
-      return '08:00am'
+      return '09am'
       break;
 
       case 12:
-      return '12:00pm'
+      return '12pm'
       break;
 
       case 15:
-      return '03:00pm'
+      return '03pm'
       break;
 
       case 18:
-      return '06:00pm'
+      return '06pm'
       break;
 
       case 21:
-      return '09:00am'
+      return '09pm'
       break;
 
     }
