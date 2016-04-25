@@ -1,8 +1,7 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100vh;
 }
-
 .fade.ng-enter {
   transition:0.5s linear all;
   opacity:0;
@@ -18,22 +17,35 @@ body {
 .fade.ng-leave.ng-leave-active {
   opacity:0;
 }
-
+.container-fluid {
+}
+.weatherDisplay {
+}
+.fa-bolt {
+  margin: auto;
+}
 a {
   color: #00B7FF;
 }
-
 .bold {
   font-weight: bold
 }
-
-.threeDayDiv {
+.fiveDayDiv, .threeDayDiv {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center
+  justify-content: space-between;
+  width: 100%;
+  margin: auto;
+  text-align: center;
 }
-.fiveDayDiv {
-  display: flex;
+.oneDayDiv {
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+.thirds{
+  width: 33%;
 }

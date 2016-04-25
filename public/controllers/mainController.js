@@ -25,12 +25,11 @@ app.controller('mainController', function(weatherAPI, dateCalculations, weatherC
       })
     }
     $scope.weather = dates
-    dayOne= Object.keys(dates)[0]
-    dayTwo= Object.keys(dates)[1]
-    dayThree= Object.keys(dates)[2]
-    dayFour= Object.keys(dates)[3]
-    dayFive= Object.keys(dates)[4]
-    daySix= Object.keys(dates)[5]
+
+    var daysOfWeek= Object.keys(dates).map(function(value,index){
+      return value
+    })
+    dayOne = daysOfWeek[0]
     $scope.day = dayOne
     todaysWeather = dates[dayOne]
     $scope.currentHourly = dates[dayOne]
@@ -39,25 +38,24 @@ app.controller('mainController', function(weatherAPI, dateCalculations, weatherC
     currentTemp = Object.keys(dates[dayOne]['hourly'])[0];
     $scope.currentTemp = dates[dayOne]['hourly'][currentTemp]
 
-    var threeDayForecast = {
-      [dayTwo] : dates[dayTwo]['hourly'],
-      [dayThree] : dates[dayThree]['hourly'],
-      [dayFour] : dates[dayFour]['hourly']
-    }
-    var fiveDayForecast = {
-      [dayTwo] : dates[dayTwo]['hourly'],
-      [dayThree] : dates[dayThree]['hourly'],
-      [dayFour] : dates[dayFour]['hourly'],
-      [dayFive] : dates[dayFive]['hourly'],
-      [daySix] : dates[daySix]['hourly']
+    var x=0
+    while (x < 3) {
+      var threeDayForecast = threeDayForecast || {}
+      threeDayForecast[daysOfWeek[x]] = dates[daysOfWeek[x]]['hourly']
+      x+=1
     }
 
-    console.log(threeDayForecast);
+
+    var y=0
+    while (y < 5) {
+      var fiveDayForecast = fiveDayForecast || {}
+      fiveDayForecast[daysOfWeek[y]] = dates[daysOfWeek[y]]['hourly']
+      y+=1
+    }
+
+    console.log(fiveDayForecast);
     $scope.threeDayForecast = threeDayForecast;
     $scope.fiveDayForecast = fiveDayForecast;
-
-    $scope.array1 = [1,3,5,6,7,8]
-    $scope.array2 = ['hey','whatsup','hello']
 
   })
 

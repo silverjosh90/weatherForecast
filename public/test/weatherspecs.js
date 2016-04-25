@@ -30,51 +30,47 @@ describe('On the Forecast page', function() {
     expect(element(by.css('.hourlyCast')).isDisplayed()).toBeTruthy()
 
   })
-  it('Shows temperatures for all 3 days', function(){
+  it('Shows temperatures for all 3 days when 3day is clicked', function(){
     browser.get('http://localhost:8080/');
+    element(by.model('extendedButton')).click()
     element(by.model('threeDayButton')).click()
+
     expect(element(by.css('.iconShow')).isPresent()).toBeTruthy()
     expect(element(by.css('.descriptionShow')).isDisplayed()).toBeTruthy()
-    expect(element(by.css('.temperatureShow')).isDisplayed()).toBeTruthy()
+    expect(element(by.css('#tempShow')).isDisplayed()).toBeTruthy()
 
 
   })
-  // it('Displays 3-day forecast and no other when 3 day Is clicked', function(){
-  //   browser.get('http://localhost:8080/');
-  //   element(by.css('#threeDayButton')).click()
-  //   expect(element(by.model('oneDay')).isDisplayed().toBeFalsy()
-  //   expect(element(by.model('threeDay')).isDisplayed().toBeTruthy()
-  //   expect(element(by.model('fiveDay')).isDisplayed().toBeFalsy()
-  //
-  // })
-  // it('3 day forecast expands', function(){
-  //   browser.get('http://localhost:8080/');
-  //   element(by.css('#threeDayExpand')).click()
-  //   expect(element(by.model('threeDayFull')).isDisplayed().toBeTruthy()
-  //
-  //
-  // })
-  // it('Displays 5-day forecast and no other when 5 day Is clicked', function(){
-  //   browser.get('http://localhost:8080/');
-  //   element(by.css('#fiveDayButton')).click()
-  //   expect(element(by.model('oneDay')).isDisplayed().toBeFalsy()
-  //   expect(element(by.model('threeDay')).isDisplayed().toBeFalsy()
-  //   expect(element(by.model('fiveDay')).isDisplayed().toBeTruthy()
-  //
-  // })
-  // it('5 day forecast expands', function(){
-  //   browser.get('http://localhost:8080/');
-  //   element(by.css('#fiveDayExpand')).click()
-  //   expect(element(by.model('fiveDayFull')).isDisplayed().toBeTruthy()
-  //
-  //
-  // })
-  // it('forecast expands when expand forecast is clicked', function(){
-  //   browser.get('http://localhost:8080/');
-  //   element(by.css('#threeDayButton')).click()
-  //   expect(element(by.model('threeDay')).isDisplayed().toBeTruthy()
-  //   expect(element(by.model('oneDay')).isDisplayed().toBeFalsy()
-  //   expect(element(by.model('fiveDay')).isDisplayed().toBeFalsy()
-  //
-  // })
+
+  it('3 day forecast displays hourly when expanded', function(){
+    browser.get('http://localhost:8080/');
+    element(by.model('extendedButton')).click()
+    element(by.model('threeDayButton')).click()
+    element(by.model('threeDayExpander')).click()
+    expect(element(by.css('.hourlyDescription')).isDisplayed()).toBeTruthy()
+
+
+  })
+  it('Shows temperatures for all 5 days when 5 day is clicked', function(){
+    browser.get('http://localhost:8080/');
+    element(by.model('extendedButton')).click()
+    element(by.model('fiveDayButton')).click()
+
+    expect(element(by.css('#oneDayIcon')).isPresent()).toBeTruthy()
+    expect(element(by.css('.dayDescription')).isDisplayed()).toBeTruthy()
+    expect(element(by.css('.dayTemperature')).isDisplayed()).toBeTruthy()
+
+
+  })
+
+  it('5 day forecast displays hourly when expanded', function(){
+    browser.get('http://localhost:8080/');
+    element(by.model('extendedButton')).click()
+    element(by.model('fiveDayButton')).click()
+    element(by.model('fiveDayExpander')).click()
+    expect(element(by.css('.fiveDayIcons')).isPresent()).toBeTruthy()
+
+
+  })
+
 })
